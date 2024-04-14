@@ -1,0 +1,328 @@
+# World Population 1970 -2022 Analysis in RStudio
+
+This repository contains an R script for visualizing population growth trends over time using ggplot2.
+
+## Data Source
+
+The population data is sourced from the "world_population2.xlsx" Excel file.
+
+## Usage
+
+1. Clone the repository to your local machine.
+2. Open the R script file `population_analysis.R` in RStudio.
+3. Install required packages if not already installed: `readxl`, `ggplot2`, `dplyr`, etc.
+4. Download the world population file on desktop.
+5. Load the data from an Excel file into RStudio using the provided script.
+6. Run the analysis scripts to calculate statistics, create visualizations, and generate interactive plots.
+
+## Scripts
+
+Load data from Desktop to R studio:
+# If want to Load the data from a Excel file into a data frame
+library(readxl)
+
+world_population2 <-read_excel("C:/Users/khana/Desktop/world_population2.xlsx")
+View(world_population2)
+# View the first few rows of the data frame
+View(world_population2)
+
+Packages to be installed.
+install.packages("readxl")
+install.packages("ggplot2")
+install.packages("dplyr")
+install.packages("sf")
+install.packages("leaflet")
+install.packages("tidyverse")
+install.packages("scales")
+install.packages("plotly")
+install.packages("library_name")
+install.packages("tidyr")
+
+library(ggplot2)
+library(dplyr)
+library(sf)
+library(tidyverse)
+library(scales)
+library(plotly)
+library)(tidyr)
+
+# Population Statistics Calculator
+This script below contains an R script for calculating descriptive statistics (mean, median, standard deviation, range, and quartiles) for population data.
+
+## Introduction
+The provided R script calculates various descriptive statistics for population data from the year 2022.
+
+## Usage
+Simply run the R script in your preferred R environment to calculate the statistics.
+
+## Data Source
+The population data used in this script is provided within the code.
+
+# Calculate mean
+mean_value <- mean(world_population2$X2022.Population, na.rm = TRUE)
+print(paste("Mean:", mean_value))
+ 
+ # Calculate median
+median_value <- median(world_population2$X2022.Population, na.rm = TRUE)
+print(paste("Median:", median_value))
+
+# Calculate standard deviation
+std_deviation <- sd(world_population2$X2022.Population, na.rm = TRUE)
+print(paste("Standard Deviation:", std_deviation))
+
+# Calculate range
+range_value <- range(world_population2$X2022.Population, na.rm = TRUE)
+print(paste("Range:", range_value))
+
+# Calculate quartiles
+ quartiles <- quantile(world_population2$ X2022.Population, probs = c(0.25, 0.5, 0.75), na.rm = TRUE)
+print(paste("Quartiles:", quartiles))
+
+
+## Introduction
+The provided R script creates a line graph that shows the population growth trends from 1970 to 2020.
+
+## Usage
+Simply run the R script in your preferred R environment to generate the visualization.
+
+## Data Source
+The population data used in this visualization is provided in the script.
+
+## Install required packages.
+install.packages("ggplot2")
+library(ggplot2)
+
+## Run the code below first.
+world_population2 <- data.frame(
+    Year = seq(1970, 2020, by=10),
+    Population = c(3.7, 4.0, 4.4, 4.8, 5.3, 6.1) # Sample population data in billions
+)
+
+# Convert Year to factor for color gradient
+world_population2$YearFactor <- as.factor(world_population2$Year)
+
+# Creating a colorful line graph with ggplot2
+ggplot(world_population2, aes(x = Year, y = Population, group = 1)) +
+    geom_line(aes(color = YearFactor), size = 1.5) + # Line with gradient color
+    scale_color_viridis_d(begin = 0.3, end = 0.9, name = "Year") + # Using viridis color scale
+    geom_point(aes(size = Population, color = YearFactor), alpha = 0.6) + # Points with size based on Population
+    theme_minimal() + # Minimal theme for a cleaner look
+    labs(title = "Population Growth Trends Over Time",
+         x = "Year",
+         y = "Population (Billions)",
+         subtitle = "Data from 1970 to 2020",
+         caption = "Source: Your Data Source") +
+    theme(legend.position = "bottom") # Adjust legend position
+
+
+## Introduction
+The provided R script creates a scatter plot where each point represents a continent's population growth rate vs. population size in 2022.
+
+## Usage
+Simply run the R script in your preferred R environment to generate the scatter plot.
+
+## Data Source
+The population data used in this script is provided within the code.
+
+# Colorful plot for Population Growth Rate vs. Population Size (2022)
+
+ggplot(world_population2, aes(x = `2022 Population`, y = `Growth Rate`)) +
+  geom_point(aes(color = Continent), alpha = 0.8, size = 3) +  # Increased alpha and size for better visibility
+  scale_color_manual(values = c("Asia" = "hotpink", "Europe" = "blue", "Africa" = "green", 
+                                "Oceania" = "purple", "North America" = "orange", "South America" = "red")) +
+  scale_x_log10() +
+  theme_minimal() +
+  labs(title = "Population Growth Rate vs. Population Size (2022)",
+       subtitle = "Data plotted on a logarithmic scale for population",
+       x = "Population (Log Scale)",
+       y = "Growth Rate",
+       caption = "Source: Your Data Source") +
+  theme(legend.title = element_text(color = "blue", size = 12, face = "bold"),
+        legend.text = element_text(size = 10),
+        legend.position = "right")  # Adjusting legend properties for aesthetics
+
+
+## Introduction
+The provided R script generates a pie chart showing the world population distribution by continent in 2022.
+
+## Usage
+Simply run the R script in your preferred R environment to generate the pie chart.
+
+## Data Source
+The population data used in this script is provided within the code.
+
+# Pie Chart: World Population Distribution by Continent (2022)
+The script utilizes the plotly library to create the pie chart. It represents each continent's population as a percentage of the total world population in 2022.
+
+library(plotly)
+
+plot_ly(world_population2, labels = ~Continent, values = ~`2022 Population`, type = 'pie', textinfo = "label+percent") %>%
+    layout(title = 'World Population Percentage by Continent 2022')
+
+
+## Introduction
+The provided R script generates a colorful boxplot illustrating population density by continent.
+
+## Usage
+Before running the script, make sure to install the required package `readxl` by executing `install.packages("readxl")` in your R environment. Then, load the necessary libraries by executing `library(readxl)` and `library(ggplot2)`.
+
+After loading the libraries, simply run the R script in your preferred R environment to generate the boxplot.
+
+## Data Source
+The population data used in this script is provided within the code.
+
+# Boxplot: Population Density by Continent
+The script utilizes the `ggplot2` library to create a colorful boxplot, where each box represents the population density (per square kilometer) by continent.
+
+# Load necessary libraries
+
+install.packages("readxl")
+library(readxl)
+library(ggplot2)
+
+# Create a colorful boxplot
+
+ggplot(world_population2, aes(x = Continent, y = `Density (per kmÂ²)`)) +
+    geom_boxplot(fill = "skyblue", color = "green", alpha = 0.7) +  # Add color to the boxplot
+    labs(title = "Population Density by Continent", x = "Continent", y = "Density (per km²)") +
+    theme_minimal() +
+    theme(plot.title = element_text(color = "black", size = 16, face = "italic"),  # Customize title
+          axis.text.x = element_text(angle = 45, hjust = 1, color = "red"),  # Customize x-axis labels
+          axis.text.y = element_text(color = "orange"))  # Customize y-axis labels
+
+
+## Introduction
+The provided R script generates a line graph illustrating historical population trends for the top 5 populated countries.
+
+## Usage
+Before running the script, make sure to install and load the required packages `tidyr`, `dplyr`, and `ggplot2`. You can install these packages by executing `install.packages(c("tidyr", "dplyr", "ggplot2"))` in your R environment. Then, load the libraries by executing `library(tidyr)`, `library(dplyr)`, and `library(ggplot2)`.
+
+After loading the libraries, simply run the R script in your preferred R environment to generate the line graph.
+
+## Data Source
+The population data used in this script is provided within the code.
+
+# Line Graph: Historical Population Trends for Top 5 Populated Countries
+The script transforms the original wide-format dataset into a long-format dataset and filters the data for the top 5 populated countries (India, China, United States, Indonesia, Pakistan). It then creates a line graph showing the historical population trends (in millions) for these countries over the specified years.
+
+# Ensure the required libaries and packages are installed.
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+
+# Assuming 'world_population2' is your original wide-format dataset
+population_long <- world_population2 %>%
+  pivot_longer(
+    cols = c(`1970 Population`, `1980 Population`, `1990 Population`, `2000 Population`, `2010 Population`, `2020 Population`, `2022 Population`),  # Specified year columns
+    names_to = "Year",
+    values_to = "Population"
+  ) %>%
+  mutate(Year = as.numeric(gsub(" Population", "", Year))) %>%  # Remove ' Population' text and convert Year to numeric
+  filter(`Country/Territory` %in% c("India", "China", "United States", "Indonesia", "Pakistan"))
+
+# Now create the plot
+ggplot(population_long, aes(x = Year, y = Population / 1e6, color = `Country/Territory`, group = `Country/Territory`)) +
+  geom_line() +
+  labs(title = "Historical Population Trends for Selected Countries",
+       x = "Year",
+       y = "Population (Millions)") +
+  theme_minimal()
+
+
+## Introduction
+The provided R scripts generate comparison graphs for the population of Asian countries over two different years: 1970 and 2022.
+
+## Usage
+Before running the scripts, make sure to install and load the required packages `plotly` and `dplyr`. You can install the `plotly` package by executing `install.packages("plotly")` in your R environment. Then, load the libraries by executing `library(plotly)` and `library(dplyr)`.
+
+After loading the libraries, simply run each R script separately in your preferred R environment to generate the comparison graphs for the specified years.
+
+## Data Source
+The population data used in these scripts is provided within the code.
+
+# Comparison Graphs for Population of Asian Countries Over Different Years
+The scripts filter the dataset for only Asian countries and create bar charts representing the population of countries in Asia for the specified years (1970 and 2022). The bar charts are color-coded for better visualization, with each country having a unique color.
+
+
+# Ensure the required libaries and packages are installed.
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+   
+# For 1970
+library(plotly)
+library(dplyr)
+library(viridis)  # Ensure you have this package installed
+
+# Filter the dataset for only Asian countries
+asia_population <- world_population2 %>%
+  filter(Continent == "Asia")
+
+# Create the bar chart for the Asian continent with more colorful representation
+plot_ly(asia_population, x = ~`Country/Territory`, y = ~`1970 Population`, type = 'bar', 
+        color = ~`Country/Territory`, colors = viridis_pal(option = "D")(length(unique(asia_population$`Country/Territory`)))) %>%
+  layout(title = 'Population of Countries in Asia (1970)',
+         xaxis = list(title = "Country/Territory"),
+         yaxis = list(title = "Population"),
+         colorway = viridis::viridis(length(unique(asia_population$`Country/Territory`))))
+
+# Ensure the required libaries and packages are installed.
+# For 2022
+library(plotly)
+library(dplyr)
+library(viridis)  # Ensure you have this package installed
+
+# Filter the dataset for only Asian countries
+asia_population <- world_population2 %>%
+  filter(Continent == "Asia")
+
+# Create the bar chart for the Asian continent with more colorful representation
+plot_ly(asia_population, x = ~`Country/Territory`, y = ~`2022 Population`, type = 'bar', 
+        color = ~`Country/Territory`, colors = viridis_pal(option = "D")(length(unique(asia_population$`Country/Territory`)))) %>%
+  layout(title = 'Population of Countries in Asia (2022)',
+         xaxis = list(title = "Country/Territory"),
+         yaxis = list(title = "Population"),
+         colorway = viridis::viridis(length(unique(asia_population$`Country/Territory`))))
+
+
+## Introduction
+The provided R script generates a waterfall graph illustrating the population of African countries from 2000 to 2022.
+
+## Usage
+Before running the script, make sure to install and load the required packages `plotly`, `dplyr`, and `tidyr`. You can install the `plotly` package by executing `install.packages("plotly")`, and the `tidyr` package by executing `install.packages("tidyr")` in your R environment. Then, load the libraries by executing `library(plotly)`, `library(dplyr)`, and `library(tidyr)`.
+
+After loading the libraries, simply run the R script in your preferred R environment to generate the waterfall graph.
+
+## Data Source
+The population data used in this script is provided within the code.
+
+# Waterfall Graph for Population of African Countries in 2000-2022
+The script filters the dataset for African countries and prepares the data for visualization. It then creates an interactive waterfall graph representing the population of African countries from 2000 to 2022. Each bar in the graph represents the change in population over the specified period.
+
+# Ensure the required libaries and packages are installed.
+library(plotly)
+library(dplyr)
+library(tidyr)  # tidyr is needed for pivot_longer
+library(viridis)  # Ensure you have this package installed
+
+# Filter and prepare the dataset
+Europe_population <- world_population2 %>%
+    filter(Continent == "Africa") %>%
+    select(`Country/Territory`, `2000 Population`, `2022 Population`) %>%
+    pivot_longer(
+        cols = c(`2000 Population`, `2022 Population`),  # Corrected column selection
+        names_to = "Year",
+        values_to = "Population",
+        names_prefix = " Population"  # Removes ' Population' from year names
+    ) %>%
+    mutate(Year = sub("\\D", "", Year))  # Optional: clean the Year to keep just the numeric part
+
+# Create interactive toggle graph
+plot_ly(Europe_population, x = ~`Country/Territory`, y = ~Population, type = 'waterfall', 
+        color = ~Year, colors = viridis_pal(option = "D")(2)) %>%
+    layout(title = 'Waterfall Graph for Population of African Countries in 2000-2022',
+           xaxis = list(title = 'Country/Territory'),
+           yaxis = list(title = 'Population'),
+           barmode = 'group')
+
+
