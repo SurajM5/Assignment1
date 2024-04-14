@@ -26,7 +26,7 @@ View(world_population2)
 # View the first few rows of the data frame
 View(world_population2)
 
-Packages to be installed.
+# Install required packages.
 install.packages("readxl")
 install.packages("ggplot2")
 install.packages("dplyr")
@@ -88,7 +88,7 @@ Simply run the R script in your preferred R environment to generate the visualiz
 ## Data Source
 The population data used in this visualization is provided in the script.
 
-## Install required packages.
+## Ensure required packages are installed.
 install.packages("ggplot2")
 library(ggplot2)
 
@@ -154,8 +154,10 @@ The population data used in this script is provided within the code.
 # Pie Chart: World Population Distribution by Continent (2022)
 The script utilizes the plotly library to create the pie chart. It represents each continent's population as a percentage of the total world population in 2022.
 
+## Ensure required library is installed.
 library(plotly)
 
+#Enter the code.
 plot_ly(world_population2, labels = ~Continent, values = ~`2022 Population`, type = 'pie', textinfo = "label+percent") %>%
     layout(title = 'World Population Percentage by Continent 2022')
 
@@ -174,7 +176,7 @@ The population data used in this script is provided within the code.
 # Boxplot: Population Density by Continent
 The script utilizes the `ggplot2` library to create a colorful boxplot, where each box represents the population density (per square kilometer) by continent.
 
-# Load necessary libraries
+## Ensure required packages are installed.
 
 install.packages("readxl")
 library(readxl)
@@ -205,7 +207,7 @@ The population data used in this script is provided within the code.
 # Line Graph: Historical Population Trends for Top 5 Populated Countries
 The script transforms the original wide-format dataset into a long-format dataset and filters the data for the top 5 populated countries (India, China, United States, Indonesia, Pakistan). It then creates a line graph showing the historical population trends (in millions) for these countries over the specified years.
 
-# Ensure the required libaries and packages are installed.
+# Ensure the required libaries are installed.
 library(tidyr)
 library(dplyr)
 library(ggplot2)
@@ -244,7 +246,7 @@ The population data used in these scripts is provided within the code.
 The scripts filter the dataset for only Asian countries and create bar charts representing the population of countries in Asia for the specified years (1970 and 2022). The bar charts are color-coded for better visualization, with each country having a unique color.
 
 
-# Ensure the required libaries and packages are installed.
+# Ensure the required libaries are installed.
 library(tidyr)
 library(dplyr)
 library(ggplot2)
@@ -266,8 +268,7 @@ plot_ly(asia_population, x = ~`Country/Territory`, y = ~`1970 Population`, type 
          yaxis = list(title = "Population"),
          colorway = viridis::viridis(length(unique(asia_population$`Country/Territory`))))
 
-# Ensure the required libaries and packages are installed.
-# For 2022
+# Ensure the required libaries are installed.
 library(plotly)
 library(dplyr)
 library(viridis)  # Ensure you have this package installed
@@ -299,7 +300,7 @@ The population data used in this script is provided within the code.
 # Waterfall Graph for Population of African Countries in 2000-2022
 The script filters the dataset for African countries and prepares the data for visualization. It then creates an interactive waterfall graph representing the population of African countries from 2000 to 2022. Each bar in the graph represents the change in population over the specified period.
 
-# Ensure the required libaries and packages are installed.
+# Ensure the required libaries are installed.
 library(plotly)
 library(dplyr)
 library(tidyr)  # tidyr is needed for pivot_longer
